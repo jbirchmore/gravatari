@@ -1,0 +1,29 @@
+{
+    "name": "malonmedia/gravatari",
+    "type": "library",
+    "description": "A simple and fluent gravatar package for php",
+    "keywords": ["gravatar", "laravel", "avatar"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jason Walton",
+            "email": "jwalton512@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "4.0.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "*",
+        "illuminate/foundation": "4.0.*"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gravatari": "src/malonmedia"
+        }
+    }
+}
