@@ -1,6 +1,7 @@
 <?php namespace Gravatari\Extension\Laravel;
 
 use Illuminate\Support\ServiceProvider;
+use Gravatari\Api\Image;
 
 class GravatariServiceProvider extends ServiceProvider {
 
@@ -17,7 +18,7 @@ class GravatariServiceProvider extends ServiceProvider {
 
         $app['gravatari.image'] = $app->share(function($app)
         {
-            return new Gravatari\Api\Image;
+            return new Image;
         });
     }
 }
