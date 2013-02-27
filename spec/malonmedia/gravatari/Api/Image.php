@@ -17,9 +17,9 @@ class Image extends ObjectBehavior
 
     function it_should_set_valid_option()
     {
-        $this->email('foo@foo.com');
+        $this->default('mm');
 
-        $this->email()->shouldReturn('foo@foo.com');
+        $this->default()->shouldReturn('mm');
     }
 
     function it_should_set_url_generator()
@@ -29,23 +29,16 @@ class Image extends ObjectBehavior
 
     function it_should_get_url()
     {
-        $this->email('foo@foo.com')
-            ->size(120)
+        $this->size(120)
             ->rating('g')
-            ->url()->shouldReturn('http://www.gravatar.com/avatar/3717483f26171b61a4e2154fb37ffbd1?s=120&r=g');
+            ->url('foo@foo.com')->shouldReturn('http://www.gravatar.com/avatar/3717483f26171b61a4e2154fb37ffbd1?s=120&r=g');
     }
 
     function it_should_get_secured_url()
     {
-        $this->email('foo@foo.com')
-            ->size(120)
+        $this->size(120)
             ->rating('g')
-            ->urlSecure()->shouldReturn('https://www.gravatar.com/avatar/3717483f26171b61a4e2154fb37ffbd1?s=120&r=g');
-    }
-
-    function it_should_make_url_with_only_email()
-    {
-        $this->url('foo@foo.com')->shouldReturn('http://www.gravatar.com/avatar/3717483f26171b61a4e2154fb37ffbd1');
+            ->urlSecure('foo@foo.com')->shouldReturn('https://www.gravatar.com/avatar/3717483f26171b61a4e2154fb37ffbd1?s=120&r=g');
     }
 
     function it_should_url_encode_default()

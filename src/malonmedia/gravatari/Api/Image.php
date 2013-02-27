@@ -12,10 +12,6 @@ class Image extends Api {
 
     protected $urlTemplate = "www.gravatar.com/avatar/%s%s";
 
-    protected $attributes = array(
-        'email',
-    );
-
     protected $options = array(
         'size' => 's',
         'default' => 'd',
@@ -80,9 +76,7 @@ class Image extends Api {
 
     public function __call($method, $arguments)
     {
-        $valid = array_merge($this->attributes, array_keys($this->options));
-
-        if ( ! in_array($method, $valid))
+        if ( ! in_array($method, array_keys($this->options)))
         {
             throw new InvalidArgumentException("[$method] is not a valid attribute");
         }
