@@ -85,9 +85,8 @@ class Image extends Api {
      * @param  bool   $secure
      * @retrn  string
      */
-    public function url($email = null, $secure = null)
+    public function url($email, $secure = null)
     {
-        $email  = $email ?: $this->container->email;
         $hash   = $this->hash($email);
         $params = $this->compileParams();
         $url    = $this->urlGenerator->make(array($hash, $params), $secure);
@@ -101,7 +100,7 @@ class Image extends Api {
      * @param  string $email
      * @return string
      */
-    public function urlSecure($email = null)
+    public function urlSecure($email)
     {
         return $this->url($email, true);
     }
