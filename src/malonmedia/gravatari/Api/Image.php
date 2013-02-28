@@ -6,12 +6,32 @@ use InvalidArgumentException;
 
 class Image extends Api {
     
+    /**
+     * Fluent container
+     *
+     * @var Illuminate\Support\Fluent
+     */
     protected $container;
 
+    /**
+     * The url generator instance
+     *
+     * @var Gravatari\UrlGenerator
+     */
     protected $urlGenerator;
 
+    /**
+     * Template for generating url
+     *
+     * @var string
+     */
     protected $urlTemplate = "www.gravatar.com/avatar/%s%s";
 
+    /**
+     * The settable options
+     *
+     * @var array
+     */
     protected $options = array(
         'size' => 's',
         'default' => 'd',
@@ -19,6 +39,11 @@ class Image extends Api {
         'rating' => 'r',
     );
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct($urlGenerator = null);
@@ -28,6 +53,14 @@ class Image extends Api {
         $this->urlGenerator->setTemplate($this->urlTemplate);
     }
 
+    /**
+     * Set a value in the container
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     *
+     * @return void
+     */
     protected function set($key, $value)
     {
         if ($key == 'default') $value = urlencode($value);
@@ -35,11 +68,23 @@ class Image extends Api {
         $this->container->{$key} = $value;
     }
 
+    /**
+     * Get the urlGenerator instance
+     *
+     * @return Gravatari/UrlGenerator
+     */
     public function getUrlGenerator()
     {
         return $this->urlGenerator;
     }
 
+    /**
+     * Generate url for an email
+     *
+     * @param  string $email
+     * @param  bool   $secure
+     * @retrn  string
+     */
     public function url($email = null, $secure = null)
     {
         $email  = $email ?: $this->container->email;
@@ -50,11 +95,22 @@ class Image extends Api {
         return $url;
     }
 
+    /**
+     * Generate secure url for an email
+     *
+     * @param  string $email
+     * @return string
+     */
     public function urlSecure($email = null)
     {
         return $this->url($email, true);
     }
 
+    /**
+     * Compile params into query string
+     *
+     * @return string
+     */
     protected function compileParams()
     {
         $options = array();
@@ -74,6 +130,13 @@ class Image extends Api {
         return $params;
     }
 
+    /**
+     * Magic call method
+     *
+     * @param  string $method
+     * @param  array  $arguments
+     * @return mixed
+     */
     public function __call($method, $arguments)
     {
         if ( ! in_array($method, array_keys($this->options)))
