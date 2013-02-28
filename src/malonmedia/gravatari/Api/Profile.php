@@ -4,6 +4,7 @@ use Gravatari\Api;
 use Gravatari\UrlGenerator;
 use Guzzle\Http\Client;
 use InvalidArgumentException;
+use Guzzle\Http\Exception\ClientErrorResponseException;
 
 class Profile extends Api {
 
@@ -67,9 +68,12 @@ class Profile extends Api {
     {
         $url = $this->urlJson($email, $callback);
 
-        $response = $this->request($url, $client)->getBody();
+        if ( ! $response = $this->request($url, $client))
+        {
+            return false;
+        }
 
-        return $response;
+        return $response->getBody();
     }
 
     protected function request($url, $client = null)
@@ -78,7 +82,14 @@ class Profile extends Api {
 
         $request = $client->get($url);
 
-        $response = $request->send();
+        try 
+        {
+            $response = $request->send();
+        }
+        catch (ClientErrorResponseException $e)
+        {
+            return false;
+        }
 
         return $response;
     }
