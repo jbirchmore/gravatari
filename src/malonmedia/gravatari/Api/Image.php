@@ -40,20 +40,6 @@ class Image extends Api {
     );
 
     /**
-     * Constructor
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct($urlGenerator = null);
-
-        $this->urlGenerator = $urlGenerator ?: new UrlGenerator;
-
-        $this->urlGenerator->setTemplate($this->urlTemplate);
-    }
-
-    /**
      * Set a value in the container
      *
      * @param  string $key
