@@ -102,4 +102,13 @@ class Profile extends Api {
 
         return $response;
     }
+
+    public function requestXml($email, $client = null)
+    {
+        $url = $this->urlXml($email);
+
+        $response = $this->request($url, $client)->getBody();
+
+        return $response;
+    }
 }

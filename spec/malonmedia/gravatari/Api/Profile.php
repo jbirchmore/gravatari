@@ -51,16 +51,24 @@ class Profile extends ObjectBehavior
         $request->send()->willReturn($response);
         $client->get('http://www.gravatar.com/3717483f26171b61a4e2154fb37ffbd1.json')->willReturn($request);
 
-        $this->requestJson('foo@foo.com', null, $client);
+        $this->requestJson('foo@foo.com', null, $client)->shouldReturn($json);
     }
     
     function it_should_make_xml_request($client, $request, $response)
     {
-        $php = serialize(array('foo' => 'bar', 'bar' => 'foo'));
-        $response->getBody()->willReturn($php);
+        $response->getBody()->willReturn('foo');
+        $request->send()->willReturn($response);
+        $client->get('http://www.gravatar.com/3717483f26171b61a4e2154fb37ffbd1.xml')->willReturn($request);
+
+        $this->requestXml('foo@foo.com', $client)->shouldReturn('foo');
+    }
+
+    function it_should_make_php_request($client, $request, $response)
+    {
+        $response->getBody()->willReturn('foo');
         $request->send()->willReturn($response);
         $client->get('http://www.gravatar.com/3717483f26171b61a4e2154fb37ffbd1.php')->willReturn($request);
 
-        $this->requestPhp('foo@foo.com', $client);
+        $this->requestPhp('foo@foo.com', $client)->shouldReturn('foo');
     }
 }
