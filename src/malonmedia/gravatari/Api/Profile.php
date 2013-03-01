@@ -22,6 +22,15 @@ class Profile extends Api {
      */
     protected $urlTemplate = "www.gravatar.com/%s%s";
 
+    /**
+     * Generate an url
+     *
+     * @param  string $email
+     * @param  string $format
+     * @param  string $callback
+     *
+     * @return string
+     */
     public function url($email, $format = null, $callback = null)
     {
         $hash   = $this->hash($email);
@@ -31,31 +40,74 @@ class Profile extends Api {
         return $url;
     }
 
+    /**
+     * Generate a json url
+     *
+     * @param  string $email
+     * @param  string $callback
+     *
+     * @return string
+     */
     public function urlJson($email, $callback = null)
     {
         return $this->url($email, 'json', $callback);
     }
 
+    /**
+     * Generate an xml url
+     *
+     * @param  string $email
+     *
+     * @return string
+     */
     public function urlXml($email)
     {
         return $this->url($email, 'xml');
     }
 
+    /**
+     * Generate a php url
+     *
+     * @param  string $email
+     *
+     * @return string
+     */
     public function urlPhp($email)
     {
         return $this->url($email, 'php');
     }
 
+    /**
+     * Generate a VCF/vCard url
+     *
+     * @param  string $email
+     *
+     * @return string
+     */
     public function urlVcf($email)
     {
         return $this->url($email, 'vcf');
     }
 
+    /**
+     * Generate a QR url
+     *
+     * @param  string $email
+     *
+     * @return string
+     */
     public function urlQr($email)
     {
         return $this->url($email, 'qr');
     }
 
+    /**
+     * Build parameter string
+     *
+     * @param  string $format
+     * @param  string $callback
+     * @return void
+     */
     private function buildParams($format, $callback = null)
     {
         $format   = $format ? ".$format" : '';
@@ -64,6 +116,14 @@ class Profile extends Api {
         return $format.$callback;
     }
 
+    /**
+     * Make a json request
+     *
+     * @param  string $email
+     * @param  string $callback
+     * @param  string $client
+     * @return void
+     */
     public function requestJson($email, $callback = null, $client = null)
     {
         $url = $this->urlJson($email, $callback);
@@ -76,6 +136,13 @@ class Profile extends Api {
         return $response->getBody();
     }
 
+    /**
+     * Make a request
+     *
+     * @param  string $url
+     * @param  string $client
+     * @return void
+     */
     protected function request($url, $client = null)
     {
         $client = $client ?: new Client;
@@ -94,6 +161,13 @@ class Profile extends Api {
         return $response;
     }
 
+    /**
+     * Make a php request
+     *
+     * @param  string $url
+     * @param  string $client
+     * @return void
+     */
     public function requestPhp($email, $client = null)
     {
         $url = $this->urlPhp($email);
@@ -103,6 +177,13 @@ class Profile extends Api {
         return $response;
     }
 
+    /**
+     * Make a xml request
+     *
+     * @param  string $url
+     * @param  string $client
+     * @return void
+     */
     public function requestXml($email, $client = null)
     {
         $url = $this->urlXml($email);
