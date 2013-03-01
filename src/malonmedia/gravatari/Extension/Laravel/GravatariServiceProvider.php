@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Gravatari\Api\Image;
+use Gravatari\Api\Profile;
 
 class GravatariServiceProvider extends ServiceProvider {
 
@@ -30,11 +31,45 @@ class GravatariServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $app = $this->app;
+        list($app, $me) = array($this->app, $this);
 
-        $app['gravatari.image'] = $app->share(function($app)
+        $app['gravatari'] = $app->share(function($app) use ($me)
         {
-            return new Image;
+            return $me;
         });
+    }
+
+    /**
+     * Create a Profile instance
+     *
+     * @return Gravatari\Api\Profile
+     */
+    public function profile()
+    {
+        return new Profile;
+    }
+
+    /**
+     * Create an Image instance
+     *
+     * @return Gravatari\Api\Image
+     */
+    public function image()
+    {
+        return new Image;
+    }
+
+    /**
+     * Magic call method
+     *
+     * @param  string $method
+     * @param  array  $args
+     * @return void
+     */
+    public function __call($method, $args)
+    {
+        $class = $this->image();
+
+        return call_user_func_array(array($class, $method), $args);
     }
 }

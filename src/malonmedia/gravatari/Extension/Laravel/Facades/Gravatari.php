@@ -9,5 +9,5 @@ class Gravatari extends Facade {
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'gravatari.image'; }
+    protected static function getFacadeAccessor() { return 'gravatari'; }
 }
