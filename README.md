@@ -63,6 +63,30 @@ $url = $gravatar->size(80)->default('mm')->url('foo@foo.com');
     
     urlSecure('email@email.com')    //retrieve a secure url for the supplied email's gravatar
 ```
+### Profiles
+
+```php
+<?php
+
+use Gravatari\Api\Profile;
+
+$profile = new Profile;
+
+// Url Methods (retrieve url in specified format)
+$profile->url('foo@foo.com');
+$profile->urlJson('foo@foo.com');
+$profile->urlJson('foo@foo.com', 'alert');      //Json method accepts optional javascript callback paremeter
+$profile->urlXml('foo@foo.com');
+$profile->urlPhp('foo@foo.com');
+$profile->urlVcf('foo@foo.com');
+$profile->urlQr('foo@foo.com');
+
+// Request Methods (send request and return response for specified format)
+$profile->requestJson('foo@foo.com');
+$profile->requestJson('foo@foo.com', 'alert');  //Json method accepts optional javascript callback paremeter
+$profile->requestXml('foo@foo.com');
+$profile->requestPhp('foo@foo.com');
+```
 
 ## Extensions
 
@@ -71,5 +95,5 @@ Support for some common frameworks is/will be provided through extensions.  Belo
 #### Laravel 4
 1. Add ``'Gravatari\Extension\Laravel\GravatariServiceProvider',`` to the ``providers`` array in ``app/config/app.php``.
 2. Add ``'Gravatari'       => 'Gravatari\Extension\Laravel\Facades\Gravatari',`` to the ``aliases`` array in ``app/config/app.php``.
-3. ``Gravatari\Api\Image`` may then be accessed via ``Gravatari::`` i.e (``Gravatari::url('foo@foo.com')``)
-
+3. To access the avatar api, use ``Gravatari::image()->url('foo@foo.com')`` or simply ``Gravatari::url('foo@foo.com')``
+4. To access the profile api, use ``Gravatari::profile()->urlJson('foo@foo.com')`` 
