@@ -12,12 +12,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "illuminate/support": "4.0.*",
+        "illuminate/support": "4.1.*",
         "guzzle/guzzle": "3.0.*"
     },
     "require-dev": {
         "phpspec/phpspec2": "*",
-        "illuminate/foundation": "4.0.*"
+        "illuminate/foundation": "4.1.*"
     },
     "config": {
         "bin-dir": "bin/"
