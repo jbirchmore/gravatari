@@ -10,14 +10,14 @@
             "email": "jwalton512@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
-        "illuminate/support": "4.1.*",
+        "illuminate/support": "~4.1",
         "guzzle/guzzle": "3.0.*"
     },
     "require-dev": {
         "phpspec/phpspec2": "*",
-        "illuminate/foundation": "4.1.*"
+        "illuminate/foundation": "~4.1"
     },
     "config": {
         "bin-dir": "bin/"
