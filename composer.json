@@ -10,7 +10,7 @@
             "email": "jwalton512@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "illuminate/support": "4.1.*",
         "guzzle/guzzle": "3.0.*"
