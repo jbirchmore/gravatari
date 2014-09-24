@@ -13,7 +13,7 @@
     "minimum-stability": "dev",
     "require": {
         "illuminate/support": "~4.1",
-        "guzzle/guzzle": "3.0.*"
+        "guzzle/guzzle": "3.9.*"
     },
     "require-dev": {
         "phpspec/phpspec2": "*",
